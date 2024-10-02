@@ -14,7 +14,7 @@ const pool = new Pool({
 
   pool
   .connect()
-  .then(() => console.log("Connected to PostgreSQL"))
+  .then(() => console.log("Connected to PostgreSQL..."))
   .catch((err) => {
     console.error("Error connecting to PostgreSQL:", err.message);
     process.exit(1); // Exit the application on connection error
