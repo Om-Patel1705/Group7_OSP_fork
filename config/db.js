@@ -1,24 +1,36 @@
-const { config } = require("dotenv");
+
 const { Pool } = require("pg");
 require("dotenv").config();
 
 
 const pool = new Pool({
  
-  
     connectionString: process.env.DATABASE_URL,
     ssl: true, 
   });
 
 
+  const createTablesQuery = `
+CREATE TABLE USERS(
+  	id SERIAL PRIMARY KEY,
+  	username TEXT,
+  	email TEXT,
+  	password TEXT,
+  	pic TEXT
+);
 
-  pool
-  .connect()
-  .then(() => console.log("Connected to PostgreSQL"))
+`;
+
+pool
+  .query(createTablesQuery)
+  .then(() => {
+    console.log("Tables successfully created or already exist.");
+  })
   .catch((err) => {
-    console.error("Error connecting to PostgreSQL:", err.message);
-    process.exit(1); // Exit the application on connection error
+    console.error("Error creating tables:", err.message);
   });
+
+
 
 
 
